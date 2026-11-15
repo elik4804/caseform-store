@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101010">
+<title>CASEFORM — Чехлы MagSafe</title>
+<style>
+:root{--bg:#f6f6f3;--ink:#141414;--muted:#777;--line:#e6e6e1;--dark:#111;--accent:#d9ff57;--white:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Arial,sans-serif}
+a{color:inherit;text-decoration:none}button,input,select{font:inherit}
+.top{background:#111;color:#fff;text-align:center;padding:10px 14px;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+header{height:76px;padding:0 6vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:#f6f6f3}
+.logo{font-size:22px;font-weight:900;letter-spacing:-.08em}.logo span{color:#858585}
+nav{display:flex;gap:28px;font-size:13px;color:#555}.cart{border:1px solid #222;padding:11px 16px;border-radius:30px;font-size:12px;background:transparent;cursor:pointer}
+.hero{padding:70px 6vw 58px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;max-width:1500px;margin:auto}
+.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#777;margin-bottom:20px}
+h1{font-size:clamp(48px,7vw,92px);line-height:.92;letter-spacing:-.075em;margin:0 0 24px;font-weight:850}
+.hero p{font-size:16px;line-height:1.7;color:#666;max-width:430px}
+.hero-actions{display:flex;gap:12px;align-items:center;margin-top:30px;flex-wrap:wrap}
+.btn{border:0;background:#111;color:#fff;border-radius:3px;padding:16px 23px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:.2s}
+.btn:hover{background:#333;transform:translateY(-1px)}.btn.light{background:transparent;color:#111;border:1px solid #bbb}
+.hero-art{position:relative;background:#ecece8;min-height:490px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-art img{height:440px;max-width:90%;object-fit:contain;mix-blend-mode:multiply;filter:drop-shadow(0 25px 22px #00000012)}
+.stamp{position:absolute;right:22px;bottom:22px;background:var(--accent);border-radius:50%;width:92px;height:92px;display:grid;place-items:center;text-align:center;font-weight:900;font-size:12px;transform:rotate(-12deg)}
+.strip{padding:18px 6vw;background:#111;color:#fff;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+section{padding:76px 6vw;max-width:1500px;margin:auto}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:30px;gap:20px}
+h2{font-size:clamp(32px,4vw,52px);letter-spacing:-.06em;margin:0}.sub{color:#777;font-size:13px;line-height:1.6}
+.products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.product{background:#fff;padding:14px;border:1px solid var(--line)}
+.product-photo{height:370px;background:#f1f1ee;display:flex;align-items:center;justify-content:center;position:relative}
+.product-photo img{height:92%;max-width:92%;object-fit:contain;mix-blend-mode:multiply}
+.tag{position:absolute;left:14px;top:14px;background:var(--accent);padding:8px 10px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.product-info{padding:20px 8px 8px}.product-title{font-weight:750;font-size:18px}.product-meta{color:#777;font-size:12px;margin-top:6px}
+.price-row{display:flex;align-items:center;gap:10px;margin:16px 0}.price{font-size:26px;font-weight:850;letter-spacing:-.05em}.old{color:#999;text-decoration:line-through;font-size:14px}
+.colors{display:flex;gap:9px;margin:14px 0}.color{border:1px solid #ddd;background:#fff;border-radius:30px;padding:9px 13px;font-size:11px;cursor:pointer}.color.active{border-color:#111;background:#111;color:#fff}
+.buyrow{display:flex;gap:10px}.buyrow .btn{flex:1}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.feature{padding:26px;border:1px solid var(--line);background:#fff}.feature b{display:block;font-size:14px;margin-bottom:10px}.feature p{font-size:12px;line-height:1.7;color:#777;margin:0}
+.order-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;align-items:start}
+.order-intro{background:#111;color:#fff;padding:34px;position:sticky;top:20px}.order-intro h2{font-size:42px}.order-intro p{color:#aaa;font-size:13px;line-height:1.7}
+form{background:#fff;border:1px solid var(--line);padding:28px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}.field.full{grid-column:1/-1}
+label{font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.08em}
+input,select{border:1px solid #ddd;background:#fff;padding:14px 12px;border-radius:2px;outline:none;width:100%;color:#111}
+input:focus,select:focus{border-color:#111}
+.summary{background:#f5f5f1;padding:16px;margin:8px 0 18px;display:flex;justify-content:space-between;font-size:13px}
+.note{font-size:11px;color:#888;line-height:1.6;margin-top:14px}
+footer{background:#111;color:#fff;padding:35px 6vw;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12px}
+#toast{display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#111;color:white;padding:14px 18px;z-index:10;font-size:13px;max-width:90%;text-align:center}
+@media(max-width:800px){nav{display:none}.hero{grid-template-columns:1fr;padding-top:48px}.hero-art{min-height:350px}.hero-art img{height:330px}.products{grid-template-columns:1fr}.product-photo{height:340px}.features{grid-template-columns:1fr}.order-wrap{grid-template-columns:1fr}.order-intro{position:static}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}section{padding:55px 5vw}.strip{justify-content:center;text-align:center}}
+</style>
+</head>
+<body>
+<div class="top">Магнітна фіксація MagSafe · Два кольори · Дві моделі</div>
+<header>
+  <a class="logo" href="#">CASE<span>FORM.</span></a>
+  <nav><a href="#catalog">Каталог</a><a href="#details">Переваги</a><a href="#order">Замовлення</a></nav>
+  <button class="cart" onclick="document.querySelector('#order').scrollIntoView()">ЗАМОВИТИ <span id="cartCount">0</span></button>
+</header>
+<main>
+<section class="hero">
+  <div>
+    <div class="eyebrow">Minimal design · Maximum protection</div>
+    <h1>Твій iPhone.<br>Твій стиль.</h1>
+    <p>Прозорі MagSafe-чохли з білим або чорним магнітним кільцем. Лаконічний вигляд, який не приховує дизайн смартфона.</p>
+    <div class="hero-actions"><a class="btn" href="#catalog">Обрати чохол</a><a class="btn light" href="#details">Детальніше</a></div>
+  </div>
+  <div class="hero-art"><img src="assets/clear-white.jpg" alt="Прозорий білий MagSafe чохол"><div class="stamp">SALE<br>333 ₴</div></div>
+</section>
+<div class="strip"><span>MagSafe compatible</span><span>Прозорий корпус</span><span>2 кольори</span><span>Доставка по Україні</span></div>
+<section id="catalog">
+  <div class="section-head"><div><div class="eyebrow">Колекція CASEFORM</div><h2>Обери свій чохол</h2></div><div class="sub">Одна ціна для обох моделей<br>333 грн замість 450 грн</div></div>
+  <div class="products">
+    <article class="product" data-model="iPhone 15 Pro">
+      <div class="product-photo"><span class="tag">-26%</span><img class="product-image" src="assets/clear-white.jpg" alt="Чохол iPhone 15 Pro"></div>
+      <div class="product-info"><div class="product-title">iPhone 15 Pro</div><div class="product-meta">Прозорий MagSafe-чохол</div>
+        <div class="price-row"><span class="price">333 ₴</span><span class="old">450 ₴</span></div>
+        <div class="colors"><button class="color active" data-color="Прозорий білий" data-img="assets/clear-white.jpg">Прозорий білий</button><button class="color" data-color="Прозорий чорний" data-img="assets/clear-black.jpg">Прозорий чорний</button></div>
+        <div class="buyrow"><button class="btn" onclick="chooseProduct(this)">Обрати</button></div>
+      </div>
+    </article>
+    <article class="product" data-model="iPhone 15 Pro Max">
+      <div class="product-photo"><span class="tag">-26%</span><img class="product-image" src="assets/clear-white.jpg" alt="Чохол iPhone 15 Pro Max"></div>
+      <div class="product-info"><div class="product-title">iPhone 15 Pro Max</div><div class="product-meta">Прозорий MagSafe-чохол</div>
+        <div class="price-row"><span class="price">333 ₴</span><span class="old">450 ₴</span></div>
+        <div class="colors"><button class="color active" data-color="Прозорий білий" data-img="assets/clear-white.jpg">Прозорий білий</button><button class="color" data-color="Прозорий чорний" data-img="assets/clear-black.jpg">Прозорий чорний</button></div>
+        <div class="buyrow"><button class="btn" onclick="chooseProduct(this)">Обрати</button></div>
+      </div>
+    </article>
+  </div>
+</section>
+<section id="details">
+  <div class="section-head"><div><div class="eyebrow">Деталі</div><h2>Все по суті.</h2></div></div>
+  <div class="features">
+    <div class="feature"><b>01 / MagSafe</b><p>Магнітне кільце для сумісних MagSafe-аксесуарів.</p></div>
+    <div class="feature"><b>02 / Прозорий дизайн</b><p>Прозорий корпус і вибір білого або чорного оформлення магнітного кільця.</p></div>
+    <div class="feature"><b>03 / Доставка Україною</b><p>Нова пошта або Укрпошта. Вкажи зручне відділення під час оформлення.</p></div>
+  </div>
+</section>
+<section id="order">
+  <div class="order-wrap">
+    <div class="order-intro"><div class="eyebrow" style="color:#aaa">Оформлення</div><h2>Твій чохол — за кілька кліків.</h2><p>Заповни дані для доставки. Після відправлення заявки магазин передасть замовлення менеджеру в Telegram, коли буде налаштовано Telegram-бота.</p><p><strong>333 грн</strong> за чохол · передоплата при відповідному способі — 100 грн.</p></div>
+    <form id="orderForm">
+      <div class="form-grid">
+        <div class="field"><label for="name">Ім'я та прізвище</label><input id="name" name="name" required placeholder="Як до вас звертатися"></div>
+        <div class="field"><label for="phone">Номер телефону</label><input id="phone" name="phone" required type="tel" placeholder="+380..."></div>
+        <div class="field"><label for="model">Модель iPhone</label><select id="model" name="model" required><option value="iPhone 15 Pro">iPhone 15 Pro</option><option value="iPhone 15 Pro Max">iPhone 15 Pro Max</option></select></div>
+        <div class="field"><label for="color">Колір</label><select id="color" name="color"><option>Прозорий білий</option><option>Прозорий чорний</option></select></div>
+        <div class="field"><label for="delivery">Служба доставки</label><select id="delivery" name="delivery"><option>Нова пошта</option><option>Укрпошта</option></select></div>
+        <div class="field"><label for="branch">Місто та номер відділення</label><input id="branch" name="branch" required placeholder="Наприклад, Київ, відділення №..."></div>
+        <div class="field full"><label for="payment">Спосіб оплати</label><select id="payment" name="payment">
+          <option value="Накладений платіж">Накладений платіж</option>
+          <option value="Передоплата 100 грн">Передоплата 100 грн (решта при отриманні)</option>
+          <option value="Visa / Mastercard — після підключення еквайрингу">Картка Visa / Mastercard (після підключення)</option>
+          <option value="Apple Pay — після підключення еквайрингу">Apple Pay (після підключення)</option>
+          <option value="Google Pay — після підключення еквайрингу">Google Pay (після підключення)</option>
+          <option value="Криптогаманець — після налаштування">Криптогаманець (після налаштування)</option>
+        </select></div>
+        <div class="field full"><label for="comment">Коментар (необов'язково)</label><input id="comment" name="comment" placeholder="Побажання до замовлення"></div>
+      </div>
+      <div class="summary"><span>До сплати за 1 чохол</span><strong>333 грн</strong></div>
+      <button class="btn" style="width:100%" type="submit">Надіслати замовлення</button>
+      <p class="note">Натискаючи кнопку, ви погоджуєтеся на використання вказаних контактних даних для обробки замовлення. Онлайн-оплата поки не активована: для неї потрібне підключення платіжного провайдера. Не вводьте дані банківської картки на цій сторінці.</p>
+      <p id="formStatus" class="note" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+</main>
+<footer><div class="logo">CASE<span>FORM.</span></div><div>Чохли MagSafe для iPhone 15 Pro / Pro Max</div><div>Україна · 2026</div></footer>
+<div id="toast"></div>
+<script>
+let chosen = {model:"iPhone 15 Pro",color:"Прозорий білий"};
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2600)}
+document.querySelectorAll('.product').forEach(card=>{
+  card.querySelectorAll('.color').forEach(btn=>btn.addEventListener('click',()=>{
+    card.querySelectorAll('.color').forEach(x=>x.classList.remove('active'));btn.classList.add('active');
+    card.querySelector('.product-image').src=btn.dataset.img;
+  }));
+});
+function chooseProduct(btn){
+  const card=btn.closest('.product');chosen.model=card.dataset.model;chosen.color=card.querySelector('.color.active').dataset.color;
+  document.getElementById('model').value=chosen.model;document.getElementById('color').value=chosen.color;
+  document.getElementById('cartCount').textContent='1';document.querySelector('#order').scrollIntoView({behavior:'smooth'});
+}
+document.getElementById('orderForm').addEventListener('submit',async e=>{
+  e.preventDefault();const form=e.currentTarget;const data=Object.fromEntries(new FormData(form).entries());
+  data.price=333;data.currency='UAH';data.quantity=1;
+  const status=document.getElementById('formStatus');status.textContent='Надсилаємо заявку…';
+  try{
+    const res=await fetch('/api/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+    if(!res.ok) throw new Error('server');
+    status.textContent='Дякуємо! Замовлення надіслано. Ми зв’яжемося з вами для підтвердження.';
+    form.reset();document.getElementById('cartCount').textContent='0';
+  }catch(err){
+    status.textContent='Це демонстраційна версія: сервер прийому замовлень ще не підключено. Після налаштування сайту заявки надходитимуть у Telegram.';
+  }
+});
+</script>
+</body></html>
